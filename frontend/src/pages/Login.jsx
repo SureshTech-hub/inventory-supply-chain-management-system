@@ -59,37 +59,46 @@ function Login() {
 
       <h1 className="auth-title">Login</h1>
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}> 
 
-        <input
-        type="email"
-        name="email"
-        placeholder="Email"
-        value={formData.email}
-        onChange={handleChange}
-        />
 
-        <div className="password-wrapper">
+       <div className="form-group">
+            <label>Email</label>
 
-          <input
-            type={showPassword ? "text" : "password"}
-            name="password"
-            placeholder="Password"
-            value={formData.password}
-            onChange={handleChange}
-          />
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={formData.email}
+              onChange={handleChange}
+            />
 
-          <button
-            type="button"
-            className="show-password-btn"
-            onClick={() =>
-              setShowPassword(!showPassword)
-            }
-          >
-            {showPassword ? "Hide" : "Show"}
-          </button>
+          </div>
 
-        </div>
+
+        <div className="form-group">
+            <label>Password</label>
+
+            <div className="password-wrapper">
+              <input
+                type={showPassword ? "text" : "password"}
+                name="password"
+                placeholder="Password"
+                value={formData.password}
+                onChange={handleChange}
+              />
+
+              <button
+                type="button"
+                className="show-password-btn"
+                onClick={() =>
+                  setShowPassword(!showPassword)
+                }
+              >
+                {showPassword ? "Hide" : "Show"}
+              </button>
+            </div>
+          </div>
 
         <button type="submit">Login</button>
 

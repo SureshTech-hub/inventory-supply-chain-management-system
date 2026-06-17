@@ -1,13 +1,18 @@
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import api from "../api/axios";
 
 function Register() {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
     role: "manager",
   });
+
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -34,6 +39,9 @@ function Register() {
         role: "manager",
       });
 
+      // Redirect to Login page
+      navigate("/");
+
     } catch (error) {
       alert(
         error.response?.data?.message ||
@@ -47,13 +55,12 @@ function Register() {
 
       <div className="auth-card">
 
-        <h2 className="auth-title">
-          Register
-        </h2>
+        <h2 className="auth-title">Register</h2>
 
         <form onSubmit={handleSubmit}>
 
           <div className="form-group">
+            <label>Name</label>
 
             <input
               type="text"
@@ -62,11 +69,10 @@ function Register() {
               value={formData.name}
               onChange={handleChange}
             />
-
           </div>
 
-
           <div className="form-group">
+            <label>Email</label>
 
             <input
               type="email"
@@ -75,31 +81,40 @@ function Register() {
               value={formData.email}
               onChange={handleChange}
             />
-
           </div>
 
-
           <div className="form-group">
+            <label>Password</label>
 
-            <input
-              type="password"
-              name="password"
-              placeholder="Password"
-              value={formData.password}
-              onChange={handleChange}
-            />
+            <div className="password-wrapper">
+              <input
+                type={showPassword ? "text" : "password"}
+                name="password"
+                placeholder="Password"
+                value={formData.password}
+                onChange={handleChange}
+              />
 
+              <button
+                type="button"
+                className="show-password-btn"
+                onClick={() =>
+                  setShowPassword(!showPassword)
+                }
+              >
+                {showPassword ? "Hide" : "Show"}
+              </button>
+            </div>
           </div>
 
-
           <div className="form-group">
+            <label>Role</label>
 
             <select
               name="role"
               value={formData.role}
               onChange={handleChange}
             >
-
               <option value="manager">
                 Manager
               </option>
@@ -111,33 +126,20 @@ function Register() {
               <option value="admin">
                 Admin
               </option>
-
             </select>
-
           </div>
 
-
           <button type="submit">
-
             Register
-
           </button>
 
         </form>
 
-
         <div className="auth-footer">
-
           <p>
-
-            Already have an account?
-
-            <a href="/">
-              Login
-            </a>
-
+            Already have an account?{" "}
+            <Link to="/">Login</Link>
           </p>
-
         </div>
 
       </div>
