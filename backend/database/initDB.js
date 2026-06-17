@@ -12,6 +12,4 @@ db.exec(schema, (err) => {
   } else {
     console.log("Tables created successfully");
   }
-
-  db.close();
 });
